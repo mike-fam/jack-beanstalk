@@ -1,0 +1,47 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    color: white;
+    font-family: Arial, sans-serif;
+    /*Change the font later*/
+}
+
+nav{
+    position: sticky;
+    transform: translateX(10%); /*Change this later*/
+}
+nav ul {
+    display: flex;
+    flex-direction: row;
+    width: 50%;
+}
+
+nav ul li {
+    width: 20%;
+    font-size: 2em;
+    list-style-type: none;
+    background-color: #333;
+    text-align: center;
+    padding: 7px 2px;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #0AA50F;
+
+}
+
+#bg {
+    transform-origin: bottom left;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
