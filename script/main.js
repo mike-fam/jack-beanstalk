@@ -1,69 +1,60 @@
-(function(yourcode) {
-
-    yourcode(window.jQuery, window, document);
-
-}(function($, window, document) {
-    // Define constants
+$(document).ready(function() {
     let isPopUpImage;
-    $(function() {
-        setUp();
-        bindEvents();
+    let storyNav = $("#story-nav");
+    let storyNavUl = $("#story-nav ul");
 
-    });
+    setUp();
+    bindEvents();
+
+
 
     /**
      * Setup at start
      */
-    function setUp(){
+    function setUp() {
+        storyNav.css("height", storyNavUl.height() + "px");
         setSize();
+    }
+
+
+    function setSize(){
+        let winWidth = $(window).width();
+        let winHeight = $(window).height();
+        let storySVG = $(".story-svg");
+        if(winWidth < 600) {
+            storySVG.css({
+                "height": 6175.2 * winHeight / 1080,
+                "left": winWidth / 2 - (1920/2*storySVG.height()/6175.2),
+                "bottom": 0,
+            });
+        } else {
+            storySVG.css({
+                "width": 6646 * 1280 / 1920,
+                "left":3020 + "px",
+            });
+        }
     }
 
     /**
      * Bind all events
      */
     function bindEvents(){
+        // set document size if is resized
         $(window).resize(setSize);
-        $(document).scroll(scrollBg);
-    }
-    /**
-     *Change isPopUpImage status to true
-     */
-    function popUpImageOn(){
-        isPopUpImage = !0;
-    }
-    
-    /**
-     * Change isPopUpImage to False
-     */
-    function popUpImageOff(){
-        isPopUpImage = !1;
-    }
-    
-    /**
-     * Set the size of the whole story to match the current window
-     */
-    function setSize(evt){
-        let WIN_WIDTH = $(window).width();
-        let WIN_HEIGHT = $(window).height();
-        let storyWidth = (WIN_WIDTH / WIN_HEIGHT > 1920 / 1080) ? 6646*WIN_WIDTH/1920: 6646*WIN_HEIGHT/1080;
-        $(".story-svg").attr({
-            "width": storyWidth + "px",
-        });
-    }
 
-    function mainScroll(evt){
-    
-    }
-    
+        $(document).scroll(scrollBg);
+
+        storyNav.mouseover(function(evt) {
+            storyNavUl.animate({"bottom": 0}, 200, "swing");
+        }).mouseleave(function(evt){
+            storyNavUl.animate({"bottom": storyNav.height()}, 200, "swing");
+        });
+
+
     function scrollBg(evt) {
         let yPos = $(document).scrollTop();
         $("#background-container").css({
             "left": -yPos
         })
     }
-
-    function navHover(evt) {
-        $("nav ul").css()
-    }
-
-}));
+}});
